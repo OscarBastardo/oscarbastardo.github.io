@@ -1,10 +1,31 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Oscar Bastardo</title>
+    <title>Home on Oscar Bastardo</title>
     <link>https://oscarbastardo.com/</link>
-    <description>Recent content on Oscar Bastardo</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-gb</language><atom:link href="https://oscarbastardo.com/index.xml" rel="self" type="application/rss+xml" />
+    <description>Recent content in Home on Oscar Bastardo</description>
+    <generator>Hugo -- gohugo.io</generator><atom:link href="https://oscarbastardo.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>About</title>
+      <link>https://oscarbastardo.com/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://oscarbastardo.com/about/</guid>
+      <description> About Me Software Engineer and MSc in Artificial Intelligence (candidate).
+Currently Backend Engineer at Standard Cognition.
+Professional Interests  Computer Science Artificial Intelligence Mathematics  Other Interests  Science Philosophy Music  Contact  E-Mail: me@oscarbastardo.com LinkedIn: https://www.linkedin.com/in/oscarbastardor Twitter: https://twitter.com/oscarbr92  </description>
+    </item>
+    
+    <item>
+      <title>Contact</title>
+      <link>https://oscarbastardo.com/contact/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://oscarbastardo.com/contact/</guid>
+      <description>Contact E-Mail: me@oscarbastardo.com
+LinkedIn: https://www.linkedin.com/in/oscarbastardor
+Twitter: https://twitter.com/oscarbr92</description>
+    </item>
+    
   </channel>
 </rss>
