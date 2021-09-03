@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>2020-09-03s on Oscar Bastardo</title>
+    <link>https://oscarbastardo.com/2020-09-03/</link>
+    <description>Recent content in 2020-09-03s on Oscar Bastardo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Thu, 03 Sep 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://oscarbastardo.com/2020-09-03/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Angle Sum and Difference Identities</title>
+      <link>https://oscarbastardo.com/2020-09-03/angle-identities/</link>
+      <pubDate>Thu, 03 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://oscarbastardo.com/2020-09-03/angle-identities/</guid>
+      <description>Angle Sum and Difference Identities Recently whilst revisiting trigonometry I came across a neat way of proving the angle sum and difference identities shown below:
+$sin(\alpha+\beta)=sin(\alpha)cos(\beta)+cos(\alpha)sin(\beta)$
+$cos(\alpha+\beta)=cos(\alpha)cos(\beta)-sin(\alpha)sin(\beta)$
+I have used these formulas a number of times in the past to solve problems but I had not thought much about how they came to be. It was not until I learnt the visual proof I will describe on this post that I finally acquired a solid intuition about what these equations mean.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang=""><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Modulo Operation</title>
+    <meta name="description" content="Computer science, artificial intelligence, mathematics and what have you">
+    <meta name="author" content='Oscar Bastardo'>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous">
+
+    
+    <link rel="stylesheet" href="/sass/researcher.min.css">
+
+    
+        <link rel="icon" type="image/ico" href="https://oscarbastardo.com/favicon.ico">
+    
+
+    
+        
+    
+</head>
+
+    <body><div class="container mt-5">
+    <nav class="navbar navbar-expand-sm flex-column flex-sm-row text-nowrap p-0">
+        <a class="navbar-brand mx-0 mr-sm-auto" href="https://oscarbastardo.com" title="Oscar Bastardo">
+          
+          Oscar Bastardo
+        </a>
+        <div class="navbar-nav flex-row flex-wrap justify-content-center">
+            
+                
+                
+                    <a class="nav-item nav-link" href="/" title="Home">
+                        Home
+                    </a>
+                    
+                        <span class="nav-item navbar-text mx-1">/</span>
+                    
+                
+                    <a class="nav-item nav-link" href="/about" title="About">
+                        About
+                    </a>
+                    
+                
+            
+        </div>
+    </nav>
+</div>
+<hr>
+<div id="content">
+<div class="container">
+    <h1 id="modulo-operation">Modulo Operation</h1>
+<p>Recently I started a <a href="https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge">30 day Coding Challenge</a> on LeetCode and came across a use case for the modulo operation. I had seen it applied to the same problem before, but I had not really appreciated how versatile this operation is until then. I will explain what the use case was later on, but first I would like to go through some concepts related to division that most of us hopefully learnt in school.</p>
+<h2 id="what-is-the-emmoduloem">What is the <em>modulo</em>?</h2>
+<p>The <a href="https://en.wikipedia.org/wiki/Modulo_operation">modulo operation</a> gives the remainder of the division of an integer number by another. But what does this mean? Let&rsquo;s consider two numbers <code>dividend</code> and <code>divisor</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">&gt;&gt;&gt;</span> dividend <span style="color:#f92672">=</span> <span style="color:#ae81ff">12</span> 
+<span style="color:#f92672">&gt;&gt;&gt;</span> divisor <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>
+</code></pre></div><p>If we divide <code>dividend</code> by <code>divisor</code> using the <code>/</code> operator in Python 3 we will get a rational number, or a floating-point number as it is better known in computer science:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">&gt;&gt;&gt;</span> dividend <span style="color:#f92672">/</span> divisor
+<span style="color:#ae81ff">3.0</span>
+</code></pre></div><p>If we want to work with integers we can use the <code>//</code> operator which will return the quotient of the division.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">&gt;&gt;&gt;</span> quotient <span style="color:#f92672">=</span> dividend <span style="color:#f92672">//</span> divisor
+<span style="color:#f92672">&gt;&gt;&gt;</span> quotient
+<span style="color:#ae81ff">3</span>
+</code></pre></div><p>The <em>quotient</em> is the number of times the divisor needs to be added up to get the dividend. Thus, if we multiply the divisor times the quotient we get the dividend as a result. However, this is only true for an exact division, in which the result can be expressed as an integer:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">&gt;&gt;&gt;</span> dividend <span style="color:#f92672">=</span> <span style="color:#ae81ff">15</span>
+<span style="color:#f92672">&gt;&gt;&gt;</span> divisor <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>
+<span style="color:#f92672">&gt;&gt;&gt;</span> quotient <span style="color:#f92672">=</span> dividend <span style="color:#f92672">//</span> divisor
+<span style="color:#f92672">&gt;&gt;&gt;</span> quotient
+<span style="color:#ae81ff">3</span>
+<span style="color:#f92672">&gt;&gt;&gt;</span> dividend <span style="color:#f92672">==</span> divisor <span style="color:#f92672">*</span> quotient
+<span style="color:#66d9ef">True</span>
+</code></pre></div><p>For a division that returns a rational number, we will not be able to get the dividend by just multiply the divisor by the quotient:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">&gt;&gt;&gt;</span> dividend <span style="color:#f92672">=</span> <span style="color:#ae81ff">15</span>
+<span style="color:#f92672">&gt;&gt;&gt;</span> divisor <span style="color:#f92672">=</span> <span style="color:#ae81ff">6</span>
+<span style="color:#f92672">&gt;&gt;&gt;</span> quotient <span style="color:#f92672">=</span> dividend <span style="color:#f92672">//</span> divisor
+<span style="color:#f92672">&gt;&gt;&gt;</span> quotient
+<span style="color:#ae81ff">2</span>
+<span style="color:#f92672">&gt;&gt;&gt;</span> dividend <span style="color:#f92672">==</span> divisor <span style="color:#f92672">*</span> quotient
+<span style="color:#66d9ef">False</span>
+</code></pre></div><p>The missing value is the <em>remainder</em>, which is the amount that needs to be added to the divisor times the quotient to obtain the dividend. We can find the remainder by subtracting the divisor times quotient from the dividend.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">&gt;&gt;&gt;</span> <span style="color:#f92672">...</span>
+<span style="color:#f92672">&gt;&gt;&gt;</span> remainder <span style="color:#f92672">=</span> dividend <span style="color:#f92672">-</span> divisor <span style="color:#f92672">*</span> quotient 
+<span style="color:#f92672">&gt;&gt;&gt;</span> remainder
+<span style="color:#ae81ff">3</span>
+</code></pre></div><p>The equation in the code snippet above is equivalent to the one described by the <a href="https://en.wikipedia.org/wiki/Euclidean_division">Euclidean division</a> theorem. We can rewrite the equation to obtain the dividend:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">...</span>
+<span style="color:#f92672">&gt;&gt;&gt;</span> dividend <span style="color:#f92672">==</span> divisor <span style="color:#f92672">*</span> quotient <span style="color:#f92672">+</span> remainder 
+<span style="color:#66d9ef">True</span>
+</code></pre></div><p>Finally, the quotient and remainder can be computed by using the <a href="https://en.wikipedia.org/wiki/Division_algorithm">Division algorithm</a>, which is beyond the scope of this post but I recommend to look into and promise it is straightforward.</p>
+<h2 id="mod-in-programming">Mod in programming</h2>
+<p>Most high-level programming languages have operators that we can use to obtain both the quotient and the remainder of a division. In Python 3, the <code>//</code> operator we discussed before will give the quotient, and the mod operator <code>%</code> will give the remainder. We can directly compute the remainder for the previous division example with the mod operator:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">&gt;&gt;&gt;</span> <span style="color:#f92672">...</span>
+<span style="color:#f92672">&gt;&gt;&gt;</span> remainder <span style="color:#f92672">=</span> dividend <span style="color:#f92672">%</span> divisor
+<span style="color:#f92672">&gt;&gt;&gt;</span> remainder
+<span style="color:#ae81ff">3</span>
+</code></pre></div><p>The mod operation is convenient, as we can use it to obtain the remainder of a division instead of having to implement the Division algorithm from scratch. It is also important to notice that for exact divisions the result of a mod operation is <code>0</code> because there is no remainder. For example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">&gt;&gt;&gt;</span> dividend <span style="color:#f92672">=</span> <span style="color:#ae81ff">16</span>
+<span style="color:#f92672">&gt;&gt;&gt;</span> divisor <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>
+<span style="color:#f92672">&gt;&gt;&gt;</span> dividend <span style="color:#f92672">%</span> divisor
+<span style="color:#ae81ff">0</span>
+</code></pre></div><p>Now we are ready to dive into some of the practical applications of the mod operation. Below I will highlight some of the applications of this operation in software development. I am sure there are many more, but these will hopefully give you an idea on the types of problems you can solve by using it.</p>
+<h3 id="check-if-a-number-is-even-or-odd">Check if a number is even or odd</h3>
+<p>A basic-yet-widely-used basic example. An integer number is considered even if the result of a division of that number by 2 is an integer number. In other words the number is exactly divided by 2, or division by 2 has no remainder.</p>
+<p>With that in mind, if you want to check whether a number is even or odd (a number that is not even), simply apply a &ldquo;mod 2&rdquo; operation to the number and check if the remainder is 0 for an even number or 1 for an odd number. Some examples of this property are shown below:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#ae81ff">10</span> <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span>
+<span style="color:#ae81ff">0</span> <span style="color:#75715e"># 10 is an even number</span>
+<span style="color:#ae81ff">15</span> <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span>
+<span style="color:#ae81ff">1</span> <span style="color:#75715e"># 15 is an odd number</span>
+</code></pre></div><br/>
+<h3 id="dynamically-render-a-grid-layout">Dynamically render a grid layout</h3>
+<p>I used this approach a some years ago when working on a mobile application. The goal was to create an scrollable grid with 3 items per n rows to display images. You can think of your phone&rsquo;s photo library to get an idea of what I built. I used React Native as development framework along with a library called <a href="https://github.com/GeekyAnts/react-native-easy-grid">react-native-easy-grid</a> that is built on top of Flexbox and provides a markup language to define responsive layout structures. As an example, a grid with 2 rows and 3 items per row can be rendered using the library as follows:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">Grid</span>&gt;
+    &lt;<span style="color:#f92672">Row</span>&gt;
+      &lt;<span style="color:#f92672">Col</span>&gt;Item 1&lt;/<span style="color:#f92672">Col</span>&gt;
+      &lt;<span style="color:#f92672">Col</span>&gt;Item 2&lt;/<span style="color:#f92672">Col</span>&gt;
+      &lt;<span style="color:#f92672">Col</span>&gt;Item 3&lt;/<span style="color:#f92672">Col</span>&gt;
+    &lt;/<span style="color:#f92672">Row</span>&gt;
+    &lt;<span style="color:#f92672">Row</span>&gt;
+      &lt;<span style="color:#f92672">Col</span>&gt;Item 1&lt;/<span style="color:#f92672">Col</span>&gt;
+      &lt;<span style="color:#f92672">Col</span>&gt;Item 2&lt;/<span style="color:#f92672">Col</span>&gt;
+      &lt;<span style="color:#f92672">Col</span>&gt;Item 3&lt;/<span style="color:#f92672">Col</span>&gt;
+    &lt;/<span style="color:#f92672">Row</span>&gt;
+&lt;/<span style="color:#f92672">Grid</span>&gt;
+</code></pre></div><p>In order to create a grid and dynamically place elements in rows of 3 items each by using the language described above, with an array of items as an input, I needed to know when each row ended and the next one started. This was in order to correctly place closing and opening tags for Row elements.</p>
+<p>By calculating &ldquo;mod 3&rdquo; of the index of an item in the original array, we can obtain the position of such item in its corresponding row. This property is illustrated in Figure 1 below.
+<figure><img src="/mod_grid_example.jpg"
+         alt="mod grid example"/>
+</figure>
+
+<em>Figure 1: Grid showing each element index and row index</em></p>
+<p>The index for each item &ldquo;modulo 3&rdquo; will give us the index or position of the item in its containing row. Notice that this works if we consider the first position in a row to be the 0th, which happens to be the standard in most programming languages for array indexing.</p>
+<h3 id="extract-n-last-digits-from-a-number">Extract &lsquo;n&rsquo; last digits from a number</h3>
+<p>This was the use cas that made me think deeper about the modulo operation and inspired me to write this article. Fortunately, It does not require as much context as the previous example. This property allows us to get the last digits from a given integer number by applying a <code>mod n</code> operation to the given number, where <code>n</code> is equal to the powers of 10. The amount of zeroes in <code>n</code> is equal to the number of digits we will get from the input number. In other words, by applying <code>mod 10</code> we will get the last digit of the number, with <code>mod 100</code> we will get the last two digits, and so on.</p>
+<p>We can quickly verify this property with some code.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">&gt;&gt;&gt;</span> <span style="color:#ae81ff">1234</span> <span style="color:#f92672">%</span> <span style="color:#ae81ff">10</span>
+<span style="color:#ae81ff">4</span>
+<span style="color:#f92672">&gt;&gt;&gt;</span> <span style="color:#ae81ff">1234</span> <span style="color:#f92672">%</span> <span style="color:#ae81ff">100</span>
+<span style="color:#ae81ff">34</span>
+<span style="color:#f92672">&gt;&gt;&gt;</span> <span style="color:#ae81ff">1234</span> <span style="color:#f92672">%</span> <span style="color:#ae81ff">1000</span>
+<span style="color:#ae81ff">234</span>
+<span style="color:#f92672">&gt;&gt;&gt;</span> <span style="color:#ae81ff">1234</span> <span style="color:#f92672">%</span> <span style="color:#ae81ff">10000</span>
+<span style="color:#ae81ff">1234</span>
+</code></pre></div><p>This is a simple yet efficient way of deconstructing numerical values without having to do operations such as parsing the number to an array and fetching the last n elements, which can be more computationally expensive.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>We have done a quick revision on arithmetic. Remainders are a basic mathematical concept yet it finds its way into many real-world applications. There are more examples of this operation in real life, e.g. translating a 12-hour into a 24-hour clock time, however I hope the few examples I have shown convey how versatile this operation is and different scenarios where it can be used.</p>
+<h5 id="update-30-07-2020"><em>Update 30-07-2020</em></h5>
+<p>I updated this article by correcting my use of mathematical terminology as it was a bit loose in some instances. I also added clearer code snippets and provided links to relevant mathematical definitions. This update was partly motivated by my recent dive into <a href="https://brilliant.org/wiki/modular-arithmetic">Modular Arithmetic</a> which is the branch of Number Theory that deals with remainders. I recommend you to follow the link through if you want to better understand the mathematical foundations of the modulo operation.</p>
+<p><br> <a href="/">Back to Home</a></p>
+
+</div>
+
+        </div><div id="footer" class="mb-5">
+    <hr>
+    <div class="container text-center">
+        
+            <a href="https://twitter.com/oscarbr92" class="fab fa-twitter fa-1x" title="Twitter"></a>
+        
+            <a href="mailto:me@oscarbastardo.com" class="fas fa-envelope fa-1x" title="E-mail"></a>
+        
+    </div>
+    
+        <div class="container text-center">
+            <a href="https://oscarbastardo.com" title="By Oscar Bastardo"><small>By Oscar Bastardo</small></a>
+        </div>
+    
+</div>
+</body>
+</html>

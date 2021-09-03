@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang=""><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Adding Numbers from 1 to N</title>
+    <meta name="description" content="Computer science, artificial intelligence, mathematics and what have you">
+    <meta name="author" content='Oscar Bastardo'>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous">
+
+    
+    <link rel="stylesheet" href="/sass/researcher.min.css">
+
+    
+        <link rel="icon" type="image/ico" href="https://oscarbastardo.com/favicon.ico">
+    
+
+    
+        
+    
+</head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "\\[", right: "\\]", display: true},
+                {left: "$", right: "$", display: false},
+                {left: "\\(", right: "\\)", display: false}
+            ]
+        });
+    });
+</script>
+
+    <body><div class="container mt-5">
+    <nav class="navbar navbar-expand-sm flex-column flex-sm-row text-nowrap p-0">
+        <a class="navbar-brand mx-0 mr-sm-auto" href="https://oscarbastardo.com" title="Oscar Bastardo">
+          
+          Oscar Bastardo
+        </a>
+        <div class="navbar-nav flex-row flex-wrap justify-content-center">
+            
+                
+                
+                    <a class="nav-item nav-link" href="/" title="Home">
+                        Home
+                    </a>
+                    
+                        <span class="nav-item navbar-text mx-1">/</span>
+                    
+                
+                    <a class="nav-item nav-link" href="/about" title="About">
+                        About
+                    </a>
+                    
+                
+            
+        </div>
+    </nav>
+</div>
+<hr>
+<div id="content">
+<div class="container">
+    <h1 id="adding-numbers-from-1-to-n">Adding Numbers from 1 to N</h1>
+<p>This is one of those little problems with a background story that can make us truly appreciate the ingenuity of mathematicians. There seem to be multiple versions of this story, but the most popular one can be summarised as follows:</p>
+<p>Gauss (renowned mathematician and child prodigy) was 10 years of age and was part of an arithmetic class. His teacher came up with the idea of making his pupils add all the integers from 1 to 100, presumably to keep them busy and free himself to do other things. Gauss quickly came up with the answer: 5050. The teacher allegedly thought the child had cheated, but in reality he had applied the technique we will discuss on this post.</p>
+<p>Whilst the invention of this method precedes the works of Carl Friedrich Gauss, he reinvented and popularised it with this anecdote from his childhood. Be that as it may, how was he able to produce the answer to the problem faster than the other pupils?</p>
+<h2 id="solution">Solution</h2>
+<p>The solution to the problem is more generally called an <strong>arithmetic series</strong> which can be defined as the sum of the members of a finite arithmetic progression. An <strong>arithmetic progression</strong> is a sequence of numbers in which the difference between two consecutive numbers is constant. Take for example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">0 3 6 9 12 15
+</code></pre></div><p>The previous is an arithmetic progression with a common difference of 3.</p>
+<p>The question remains, how did Gauss reach the solution so quickly? To understand how he did it, it is useful to visualise the sequence of numbers from 1 to 100 on a line, and below the same sequence but in reversed order, like so:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">1   + 2   + 3   + 4   + 5   + ...  + 98  + 99  + 100
+100 + 99  + 98  + 97  + 96  + ...  + 3   + 2   + 1
+</code></pre></div><p>We will notice an interesting pattern here: adding each vertical pair of numbers gives the same result of 101.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">1   + 2   + 3   + 4   + 5   + ...  + 98  + 99  + 100
+100 + 99  + 98  + 97  + 96  + ...  + 3   + 2   + 1   
+----------------------------------------------------
+101 + 101 + 101 + 101 + 101 + ...  + 101 + 101 + 101  
+</code></pre></div><p>With this knowledge and also knowing that there are 100 pairs, we can compute a total sum:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">101 * 100 = 10100
+</code></pre></div><p>However, we have included duplicate pairs (e.g. 100 + 1 = 1 + 100) and we only care about unique addition of pairs. We can solve this by dividing the previous total by 2, thus removing equivalent pairs:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">10100 / 2 = 5050
+</code></pre></div><p>And now we have reached the solution to the problem of adding all the integers from 1 to 100 without having to add up the elements from 1 to 100 iteratively. There are many ways to acquire intuition behind arithmetic series, but this one I found the easiest to grasp.</p>
+<h2 id="formula-and-proof">Formula and proof</h2>
+<p>From the reasoning above we can derive a formula that can be used to compute the sum of all integers from $1$ to any number $n$. The formula is the following:</p>
+<p>$$S = \dfrac{n(n + 1)}{2}$$</p>
+<p>To derive it we can repeat the process in the previous section but applied to an arbitrary number $n$. We first write the arithmetic series $S$ from 1 to $n$ at the top, and from $n$ to 1 at the bottom:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">S = 1  +  2    +  3    +  4    +  5    + ...  + (n-2) + (n-1) + n
+S = n  + (n-1) + (n-2) + (n-3) + (n-4) + ...  + 3     + 2     + 1
+</code></pre></div><p>If we add the two equations we get:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">S  =  1    +  2    +  3    +  4    +  5    + ...  + (n-2) + (n-1) +  n
+S  =  n    + (n-1) + (n-2) + (n-3) + (n-4) + ...  + 3     + 2     +  1
+-------------------------------------------------------------------------
+2S = (n+1) + (n+1) + (n+1) + (n+1) + (n+1) + ...  + (n+1) + (n+1) + (n+1) 
+
+</code></pre></div><p>Again we notice the pattern of all the pairs adding up to the same result, in this case $(n+1)$. We can simplify the expression above by factorising it, since $(n+1)$ is added $n$ times.</p>
+<p>$$2S = n(n+1)$$</p>
+<p>Finally, we want to represent the equation with respect to $S$, so we isolate it:</p>
+<p>$$S = \dfrac{n(n+1)}{2}$$</p>
+<p><strong>QED</strong></p>
+<h2 id="application-to-algorithmic-complexity-analysis">Application to algorithmic complexity analysis</h2>
+<p>As it is often the case, I write about mathematical definitions after I see them manifest in more applied areas of knowledge. Finding them in these places makes me develop an appreciation of their universality and usefulness. In the case of the arithmetic series in particular, I was revisiting sorting algorithms and realised that the method to calculate the time complexity for algorithms like selection, insertion and bubble sort starts with the formula above.</p>
+<p>Imagine we have an array of $n$ elements, the number of iterations for these algorithms can be estimated by $n + (n-1) + (n-2) + (n-3) + &hellip;\ + 3 + 2 + 1$. This is because for each iteration, the size of the array that needs to be traversed decreases by 1. This value can be represented using the formula we derived.</p>
+<p>However for complexity analysis we are concerned about how an algorithm scales, not about the exact number of iterations it will require to perform the task. For this we need to represent the formula in a slightly different way:</p>
+<p>$$\dfrac{n(n+1)}{2} = \dfrac{n^2 + n}{2} = \dfrac{n^2}{2} + \dfrac{n}{2}$$</p>
+<p>The way to represent time complexity is by using Big O notation, for which we only care about terms with the highest growth as $n$ becomes larger. We remove $\dfrac{n}{2}$ and only $\dfrac{n^2}{2}$ remains. Moreover, it is also common to ignore any factors that do not depend on $n$, so we remove the $\dfrac{1}{2}$. The result for the time complexity is expressed as $O(n^2)$ which can be read as &ldquo;oh $n$ squared&rdquo; or &ldquo;quadratic&rdquo; time complexity.</p>
+<p>Algorithms with $O(n^2)$ complexity are usually considered to be &ldquo;slow&rdquo;, but can nevertheless be useful depending on the context in which they are applied.</p>
+<h2 id="external-resources">External Resources</h2>
+<p>Below I list the resources I found useful to write this post and also further reading and watching:</p>
+<ol>
+<li>YouTube <a href="https://www.youtube.com/watch?v=tpkzn2e5mtI">video</a> deriving the formula to the arithmetic series from 1 to $n$.</li>
+<li>Better Explained <a href="https://betterexplained.com/articles/techniques-for-adding-the-numbers-1-to-100/">article</a> with techniques to add numbers from 1 to $n$.</li>
+<li>Wikipedia <a href="https://en.wikipedia.org/wiki/Arithmetic_progression">page</a> on arithmetic progressions.</li>
+<li>Blog <a href="http://bit-player.org/wp-content/extras/gaussfiles/gauss-snippets.html">post</a> with multiple versions of the Gauss anecdote.</li>
+</ol>
+<p><br> <a href="/">Back to Home</a></p>
+
+</div>
+
+        </div><div id="footer" class="mb-5">
+    <hr>
+    <div class="container text-center">
+        
+            <a href="https://twitter.com/oscarbr92" class="fab fa-twitter fa-1x" title="Twitter"></a>
+        
+            <a href="mailto:me@oscarbastardo.com" class="fas fa-envelope fa-1x" title="E-mail"></a>
+        
+    </div>
+    
+        <div class="container text-center">
+            <a href="https://oscarbastardo.com" title="By Oscar Bastardo"><small>By Oscar Bastardo</small></a>
+        </div>
+    
+</div>
+</body>
+</html>
