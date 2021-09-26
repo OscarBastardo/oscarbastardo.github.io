@@ -5,7 +5,17 @@
     <link>https://oscarbastardo.com/</link>
     <description>Recent content in Home on Oscar Bastardo</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 27 Sep 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://oscarbastardo.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 06 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://oscarbastardo.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Markov Decision Process</title>
+      <link>https://oscarbastardo.com/2021-09-26/mdp/</link>
+      <pubDate>Mon, 06 Sep 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://oscarbastardo.com/2021-09-26/mdp/</guid>
+      <description>Markov Decision Process Introduction One of the most fundamental problems in reinforcement learning is the representation of the environment, which comprises everything that exists outside the agent. The agent interacts with the environment through actions, and the environment in turn responds to the agent with rewards and with new new situations, as shown in Figure 1.
+ Figure 1: The agent-environment interaction in a MDP. Source: Sutton &amp;amp; Barto (2018).</description>
+    </item>
+    
     <item>
       <title>Adding Numbers from 1 to N</title>
       <link>https://oscarbastardo.com/2020-09-27/adding-numbers/</link>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang=""><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Markov Decision Process</title>
+    <meta name="description" content="Computer science, artificial intelligence, mathematics and what have you">
+    <meta name="author" content='Oscar Bastardo'>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous">
+
+    
+    <link rel="stylesheet" href="/sass/researcher.min.css">
+
+    
+        <link rel="icon" type="image/ico" href="https://oscarbastardo.com/favicon.ico">
+    
+
+    
+        
+    
+</head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "\\[", right: "\\]", display: true},
+                {left: "$", right: "$", display: false},
+                {left: "\\(", right: "\\)", display: false}
+            ]
+        });
+    });
+</script>
+
+    <body><div class="container mt-5">
+    <nav class="navbar navbar-expand-sm flex-column flex-sm-row text-nowrap p-0">
+        <a class="navbar-brand mx-0 mr-sm-auto" href="https://oscarbastardo.com" title="Oscar Bastardo">
+          
+          Oscar Bastardo
+        </a>
+        <div class="navbar-nav flex-row flex-wrap justify-content-center">
+            
+                
+                
+                    <a class="nav-item nav-link" href="/" title="Home">
+                        Home
+                    </a>
+                    
+                        <span class="nav-item navbar-text mx-1">/</span>
+                    
+                
+                    <a class="nav-item nav-link" href="/about" title="About">
+                        About
+                    </a>
+                    
+                
+            
+        </div>
+    </nav>
+</div>
+<hr>
+<div id="content">
+<div class="container">
+    <h1 id="markov-decision-process">Markov Decision Process</h1>
+<h2 id="introduction">Introduction</h2>
+<p>One of the most fundamental problems in reinforcement learning is the representation of the <em>environment</em>, which comprises everything that exists outside the <em>agent</em>. The agent interacts with the environment through actions, and the environment in turn responds to the agent with rewards and with new new situations, as shown in Figure 1.</p>
+<p><figure><img src="/mdp/figure1.png"
+         alt="agent environment interaction"/>
+</figure>
+ <strong>Figure 1:</strong> The agent-environment interaction in a MDP. Source: Sutton &amp; Barto (2018).</p>
+<p>A <em>Markov decision process</em> (MDP) provides a formal framework for modelling decision making, being a mathematically idealised instance of the reinforcement learning problem [1]. In this post we will explore the history of MDP, its definition, as well as some applications that can be formulated as MDPs.</p>
+<h2 id="brief-history">Brief History</h2>
+<p>Markov decision processes were introduced by Richard Bellman as part of his research into solving the <em>optimal control problem</em> in the late 1950s. This problem deals with the design of a controller that optimises a measure of a dynamic system&rsquo;s behaviour over a period of time. In that sense, MDPs are the discrete, stochastic version of the optimal control problem.</p>
+<p>Bellman and others also developed an approach to find an &ldquo;optimal return function&rdquo; or <em>value function</em>, know today as the <em>Bellman equation</em>. The methods for solving the optimal control problem by solving the Bellman equation are known as <em>dynamic programming</em>. Later in the 1960s, Ronald Howard presented the <em>policy iteration</em> method for solving MPDs. The concepts described above form the foundation for modern reinforcement learning.</p>
+<h2 id="definition">Definition</h2>
+<p>A Markov decision process is a tuple $(\mathrm{S}, \mathrm{A}, \mathrm{R})$ where:</p>
+<ul>
+<li>$\mathrm{S}$ is the <strong>state space</strong> set.</li>
+<li>$\mathrm{A}$ is the <strong>action space</strong> set.</li>
+<li>$\mathrm{R}$ is the <strong>reward space</strong> set.</li>
+</ul>
+<p>The interaction between the agent and environment occurs in a sequence of time steps $t=0,1,2,3,\dots$. At each time step $t$, the agent receives a representation of the environment&rsquo;s state $S_t \in S$, takes an action $A_t \in \mathrm{A}(s)$, receives a reward $R_{t+1} \in \mathrm{R} \subset \mathbb{R}$ and transitions to a new state $S_{t+1} \in S$.</p>
+<p>This interaction causes a <strong>trajectory</strong> that begins as follows:</p>
+<p>$$S_0, A_0, R_1, S_1, A_1, R_2, S_2, A_2, R_3, \dots$$</p>
+<p>For finite MDPs, the sets in the tuple $(\mathrm{S}, \mathrm{A}, \mathrm{R})$ all have a finite number of elements, and the random variables $S_t$ and $R_t$ have well defined discrete probability distributions which depend only on the previous state and action. In other words, the probability of any given values $s' \in \mathrm{S}$ and $r \in \mathrm{R}$ occurring at time step $t$ is given by the values of the previous state and action. Formally:</p>
+<p>$$P(s',r \mid s, a)\ \dot{=}\ \text{Pr}{S_t=s',R_t=r \mid S_{t-1}=s, A_{t-1}=a}$$</p>
+<p>for all $s',s \in \mathrm{S}$, $r \in \mathrm{R}$, and $a \in \mathrm{A}$.</p>
+<h2 id="mdp-framework">MDP framework</h2>
+<p>The MDP framework is abstract and can be applied in many different ways. Consider the following examples:</p>
+<ul>
+<li><em>Time steps</em> need not be real time intervals, e.g. they can be sequence of steps in acting.</li>
+<li><em>Actions</em> can be low-level, such as applying voltage to a robot&rsquo;s actuator, or high level, such as navigating to a location.</li>
+<li><em>States</em> can be determined by low-level sensations, such as direct sensor readings, or high level-representations, such as objects in a video frame.</li>
+</ul>
+<p>In general, <em>actions</em> are any decisions we want to learn to make, and <em>states</em> are the information that is useful in making decisions. Moreover, the boundary between <em>agent</em> and <em>environment</em> is not the same as the boundary between a human, animal or robot&rsquo;s body and the rest of the physical world. Instead, anything the agent has no control over is part of the environment.</p>
+<h2 id="examples">Examples</h2>
+<p>Below are some examples of environments that can be represented by MDPs [2]:</p>
+<table>
+<thead>
+<tr>
+<th>Environment</th>
+<th>State space</th>
+<th>Action space</th>
+<th>Reward function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Hotter, colder</strong>: <br> Guess a randomly selected number using hints</td>
+<td>Int range <code>0-3</code>, where <code>0</code> means no guess yet submitted, <code>1</code> means guess is lower than the target, <code>2</code> means guess is equal to the target, and <code>3</code> means guess is higher than the target.</td>
+<td>Float from <code>-2000.0</code> to <code>2000.0</code>. The float is the number the agent is guessing.</td>
+<td>The reward is the squared percentage of the way the agent has guessed towards the target.</td>
+</tr>
+<tr>
+<td><strong>Cart Pole</strong>:      <br> Balance a pole in a cart</td>
+<td>A four-element vector with ranges from <code>[-4.8, -Inf, -4.2, -Inf]</code> to <code>[4.8, Inf, 4.2, Inf]</code>. First element is the cart position, second is the cart velocity, third is pole angle in radians, fourth is the pole velocity at tip.</td>
+<td>Int range <code>0-1</code>. <code>0</code> means push cart left, <code>1</code> means push cart right.</td>
+<td>The reward is <code>1</code> for every step taken, including the terminal step</td>
+</tr>
+<tr>
+<td><strong>Lunar Lander</strong>:   <br> Navigate a lander to its landing pad</td>
+<td>An eight-element vector with ranges from <code>[-Inf, -Inf, -Inf, -Inf, -Inf, -Inf, 0, 0]</code> to <code>[Inf, Inf, Inf, Inf, Inf, Inf, 1, 1]</code>. First element is the x position, second the y position, the third is the x velocity, the fourth is the y velocity, fifth is the vehicle&rsquo;s angle, sixth is the angular velocity, and the last two values are Booleans indicating legs contact with the ground.</td>
+<td>Int range <code>0-3</code>. <code>0</code> means do nothing, <code>1</code> means fire left engine, <code>2</code> means fire main engine, <code>3</code> means fire right engine.</td>
+<td>The reward for landing is <code>200</code>. There is a reward for moving from the top to the landing pad, for crashing or coming to rest, for each leg touching the ground, and for firing the engines.</td>
+</tr>
+<tr>
+<td><strong>Pong</strong>:           <br> Bounce the ball past the opponent, and avoid letting the ball pass you</td>
+<td>A tensor of shape <code>[2021, 160, 3]</code>. Values ranging <code>0-225</code>. Represents a game screen image.</td>
+<td>Int range <code>0-5</code>. Action <code>0</code> is do nothing, <code>1</code> is fire, <code>2</code> is up, <code>3</code> is right, <code>4</code> is left, <code>5</code> is down. Notice how some actions don&rsquo;t affect the game in any way. In reality the paddle can only move up or down, or not move.</td>
+<td>The reward is <code>1</code> when the ball goes beyond the opponent, and a <code>-1</code> when your agent&rsquo;s paddle misses the ball.</td>
+</tr>
+<tr>
+<td><strong>Humanoid</strong>:       <br> Make a robot run as fast as possible and not fall</td>
+<td>A 44-element (or more, depending on the implementation) vector. Values ranging from <code>-Inf</code> to <code>Inf</code>. Represents the position and velocities of the robot&rsquo;s joints.</td>
+<td>A 17-element vector. Values ranging from <code>-Inf</code> to <code>Inf</code>. Represents the forces to apply to the robot&rsquo;s joints.</td>
+<td>The reward is calculated based on forward motion with a small penalty to encourage a natural gait.</td>
+</tr>
+</tbody>
+</table>
+<p>Note that for some environments, such as the cart pole one, obtaining the transition function can be achieved by looking at the code implementing the dynamics. For other environments, such as Pong, the dynamics are hidden inside an Atari emulator and the corresponding ROM file.</p>
+<h2 id="references">References</h2>
+<ol>
+<li>Sutton, R.S. and Barto, A.G., 2018. <em>Reinforcement learning: An introduction</em>. MIT press.</li>
+<li>Morales, M., 2020. <em>Grokking deep reinforcement learning</em>. Simon and Schuster.</li>
+</ol>
+<p><br> <a href="/">Back to Home</a></p>
+
+</div>
+
+        </div><div id="footer" class="mb-5">
+    <hr>
+    <div class="container text-center">
+        
+            <a href="https://twitter.com/oscarbr92" class="fab fa-twitter fa-1x" title="Twitter"></a>
+        
+            <a href="mailto:me@oscarbastardo.com" class="fas fa-envelope fa-1x" title="E-mail"></a>
+        
+    </div>
+    
+        <div class="container text-center">
+            <a href="https://oscarbastardo.com" title="By Oscar Bastardo"><small>By Oscar Bastardo</small></a>
+        </div>
+    
+</div>
+</body>
+</html>
