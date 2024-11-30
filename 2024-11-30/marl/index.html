@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang=""><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Multi-Agent Reinforcement Learning</title>
+    <meta name="description" content="Computer science, artificial intelligence, mathematics and what have you">
+    <meta name="author" content='Oscar Bastardo'>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous">
+
+    
+    <link rel="stylesheet" href="/sass/researcher.min.css">
+
+    
+        <link rel="icon" type="image/ico" href="https://oscarbastardo.com/favicon.ico">
+    
+
+    
+        
+    
+</head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "\\[", right: "\\]", display: true},
+                {left: "$", right: "$", display: false},
+                {left: "\\(", right: "\\)", display: false}
+            ]
+        });
+    });
+</script>
+
+    <body><div class="container mt-5">
+    <nav class="navbar navbar-expand-sm flex-column flex-sm-row text-nowrap p-0">
+        <a class="navbar-brand mx-0 mr-sm-auto" href="https://oscarbastardo.com" title="Oscar Bastardo">
+          
+          Oscar Bastardo
+        </a>
+        <div class="navbar-nav flex-row flex-wrap justify-content-center">
+            
+                
+                
+                    <a class="nav-item nav-link" href="/" title="Home">
+                        Home
+                    </a>
+                    
+                        <span class="nav-item navbar-text mx-1">/</span>
+                    
+                
+                    <a class="nav-item nav-link" href="/about" title="About">
+                        About
+                    </a>
+                    
+                
+            
+        </div>
+    </nav>
+</div>
+<hr>
+<div id="content">
+<div class="container">
+    <h1 id="multi-agent-reinforcement-learning">Multi-Agent Reinforcement Learning</h1>
+<p>Reinforcement learning (RL) can be extended to multi-agent systems (MAS) by replacing the single agent MDP formulation with a more general <em>Markov game</em>, also known as a stochastic game (Shapley, 1953). A Markov game, introduced by Littman (1994) as an extension of the <a href="/2021-09-26/mdp">Markov decision process</a> (MDP) formalisation, is a mathematical framework that uses game theory to reason about multiple interactive agents in a shared environment. It is formalised (Yang and Wang, 2021) by the tuple:</p>
+<p>$$\left\langle N, \mathbb{S},\lbrace\mathbb{A}^i\rbrace_{i \in{1, \ldots, N}}, \mathcal{P},\lbrace\mathcal{R}^i\rbrace_{i \in{1, \ldots, N}}, \gamma\right\rangle$$</p>
+<p>where:</p>
+<ul>
+<li>$N$ is the number of agents;</li>
+<li>$\mathbb{S}$ is the state space observed by all agents;</li>
+<li>$\mathbb{A}^i$ is the set of actions for agent $i$, and $\mathbf{A}:=\mathbb{A}^1 \times \cdots \times \mathbb{A}^N$ is the joint action set;</li>
+<li>$\mathcal{P}: \mathbb{S} \times \mathbf{A} \rightarrow \Delta(\mathbb{S})$ is the transition probability from state $s \in \mathbb{S}$ to $s&rsquo; \in \mathbb{S}$ given the joint action $\mathbf{a} \in \mathbf{A}$ at time $t$, where $\Delta(\mathbb{S})$ is the set of probability distributions over $\mathbb{S}$;</li>
+<li>$\mathcal{R}^i: \mathbb{S} \times \mathbf{A} \times \mathbf{S} \rightarrow \mathbb{R}$ is the reward function for agent $i$ after transitioning from state $s \in \mathbb{S}$ to $s&rsquo; \in \mathbb{S}$ given the joint action $\mathbf{a} \in \mathbf{A}$ at time $t$; and</li>
+<li>$\gamma \in [0,1]$ is the discount factor dictating the importance of future rewards.</li>
+</ul>
+<p>The goal of each agent $i$ in a multi-agent reinforcement learning (MARL) scenario is to solve the Markov game by finding the behavioural policy, known as <em>mixed strategy</em> in game theory, $\pi^i \in \Pi^i: \mathbb{S} \rightarrow \Delta(\mathbb{A}^i)$ that maximises the discounted cumulative reward. Finding an optimal policy requires each agent to strategically consider the actions of other agents when determining its own policy (Yang and Wang, 2021). The type of game is determined by the reward structure (Gronauer and Diepold, 2022):</p>
+<ul>
+<li>In a <em>fully-cooperative</em> setting, all agents receive the same reward $\mathcal{R} = \mathcal{R}^i = \dots = \mathcal{R}^N$ function for state transitions, which encourages collaboration to maximise team performance. In a more general <em>cooperative</em> game, agents are encouraged to collaborate but do not share the same rewards.</li>
+<li>In a <em>fully-competitive</em> setting, also known as a <em>zero-sum</em> Markov game, the sum of rewards equals zero for any state transition, i.e., $\sum_{i=1}^{N} \mathcal{R}^i(s,a,s&rsquo;) = 0, s \in \mathbb{S}, a \in \mathbf{A}$, which promotes maximisation of individual rewards. In a more general <em>competitive</em> game, agents are encouraged to beat their opponents but the sum of rewards does not necessarily equal zero.</li>
+<li>A <em>mixed</em> setting, also known as <em>general-sum</em> Markov game, is neither fully cooperative nor fully competitive, and imposes no restrictions on agent reward functions.</li>
+</ul>
+<h2 id="references">References</h2>
+<ul>
+<li>Shapley, L.S., 1953. Stochastic Games*. Proceedings of the National Academy of Sciences [Online], 39(10), pp.1095–1100.</li>
+<li>Littman, M.L., 1994. Markov Games as a Framework for Multi-Agent Reinforcement Learning. In Proceedings of the Eleventh International Conference on Machine Learning. Morgan Kaufmann, pp.157–163.</li>
+<li>Yang, Y. and Wang, J., 2021. An Overview of Multi-Agent Reinforcement Learning from Game Theoretical Perspective [Online]. arXiv.</li>
+<li>Gronauer, S. and Diepold, K., 2022. Multi-agent deep reinforcement learning: a survey. Artificial Intelligence Review [Online], 55(2), pp.895–943.</li>
+</ul>
+<p><br> <a href="/">Back to Home</a></p>
+
+</div>
+
+        </div><div id="footer" class="mb-5">
+    <hr>
+    <div class="container text-center">
+        
+            <a href="https://twitter.com/oscarbr92" class="fab fa-twitter fa-1x" title="Twitter"></a>
+        
+            <a href="mailto:me@oscarbastardo.com" class="fas fa-envelope fa-1x" title="E-mail"></a>
+        
+    </div>
+    
+        <div class="container text-center">
+            <a href="https://oscarbastardo.com" title="By Oscar Bastardo"><small>By Oscar Bastardo</small></a>
+        </div>
+    
+</div>
+</body>
+</html>

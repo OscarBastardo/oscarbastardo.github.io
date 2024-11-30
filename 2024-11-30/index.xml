@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>2024-11-30s on Oscar Bastardo</title>
+    <link>https://oscarbastardo.com/2024-11-30/</link>
+    <description>Recent content in 2024-11-30s on Oscar Bastardo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sat, 30 Nov 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://oscarbastardo.com/2024-11-30/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Multi-Agent Reinforcement Learning</title>
+      <link>https://oscarbastardo.com/2024-11-30/marl/</link>
+      <pubDate>Sat, 30 Nov 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://oscarbastardo.com/2024-11-30/marl/</guid>
+      <description>Multi-Agent Reinforcement Learning Reinforcement learning (RL) can be extended to multi-agent systems (MAS) by replacing the single agent MDP formulation with a more general Markov game, also known as a stochastic game (Shapley, 1953). A Markov game, introduced by Littman (1994) as an extension of the Markov decision process (MDP) formalisation, is a mathematical framework that uses game theory to reason about multiple interactive agents in a shared environment. It is formalised (Yang and Wang, 2021) by the tuple:</description>
+    </item>
+    
+  </channel>
+</rss>
